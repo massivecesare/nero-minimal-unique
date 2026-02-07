@@ -2,200 +2,229 @@
 <html lang="it">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>BUBBLEBEE | Luxury Eco Retreat Abruzzo</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
   :root{
     --bg:#050608;
-    --card:#0f1114;
+    --panel:#0f1114;
     --accent:#f4d27a;
-    --text:#f5f5f5;
     --muted:#9aa0a8;
-    --radius:18px;
-    --pad:16px;
-    --maxw:1100px;
+    --text:#f5f5f5;
+    --radius:20px;
+    --pad:18px;
+    --maxw:1200px;
+    --container-gap:20px;
+    --shadow: 0 6px 20px rgba(0,0,0,0.45);
+    --fluid-min:14; /* base font-size in px for smallest screens */
+    --fluid-max:18; /* base font-size in px for largest screens */
   }
 
-  /* Mobile-first reset */
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    background:linear-gradient(180deg,#0b0c0f 0%, #050608 100%);
-    color:var(--text);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    line-height:1.45;
-    padding-bottom:48px;
-  }
+  /* Fluid typography */
+  html{font-size:calc(var(--fluid-min)px + (var(--fluid-max) - var(--fluid-min)) * ((100vw - 320px) / (1200 - 320))); -webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:
+    radial-gradient(circle at top left,#0b0d10 0,#050608 60%);color:var(--text);line-height:1.45;-webkit-font-smoothing:antialiased}
 
   a{color:inherit;text-decoration:none}
   img{display:block;max-width:100%;height:auto;border-radius:12px}
 
-  /* Layout */
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:12px var(--pad)}
-  header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg,rgba(5,6,8,0.9),rgba(5,6,8,0.7));backdrop-filter:blur(8px);border-bottom:1px solid rgba(244,210,122,0.06)}
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:10px var(--pad)}
-  .logo{display:inline-flex;align-items:center;gap:10px;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#b48b3a);color:#1b1305;font-weight:700;font-size:12px}
-  .cta{font-size:13px;padding:8px 12px;border-radius:999px;background:transparent;border:1px solid rgba(244,210,122,0.18);color:var(--accent)}
-  nav.small{display:flex;gap:10px;font-size:13px;color:var(--muted);align-items:center}
-  nav.small a{padding:8px;border-radius:10px}
-  nav.small a:active,nav.small a:focus{outline:2px solid rgba(244,210,122,0.12)}
-
-  /* Hero */
-  .hero{position:relative;border-radius:20px;overflow:hidden;margin:14px 0;padding:18px;background:linear-gradient(180deg,rgba(20,22,26,0.6),rgba(5,6,8,0.85))}
-  .hero .bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:contrast(0.95) saturate(0.9);opacity:0.36}
-  .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,6,8,0.2),rgba(5,6,8,0.9))}
-  .hero-content{position:relative;z-index:2}
-  .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(5,6,8,0.6);border:1px solid rgba(244,210,122,0.18);color:var(--accent);font-size:11px;margin-bottom:10px}
-  h1{font-size:20px;margin:6px 0 8px;text-transform:uppercase;letter-spacing:0.04em}
-  p.lead{color:var(--muted);font-size:14px;max-width:360px;margin-bottom:12px}
-
-  .hero-actions{display:flex;gap:10px;flex-wrap:wrap}
-  .btn{padding:10px 14px;border-radius:999px;font-weight:600;font-size:13px;border:1px solid rgba(244,210,122,0.12);background:transparent;color:var(--accent)}
+  /* Layout container */
+  .site{max-width:var(--maxw);margin:0 auto;padding:12px}
+  header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg,rgba(5,6,8,0.92),rgba(5,6,8,0.78));backdrop-filter:blur(8px);border-bottom:1px solid rgba(244,210,122,0.06)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px var(--pad)}
+  .brand{display:flex;align-items:center;gap:10px}
+  .logo{padding:6px 12px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#b48b3a);color:#1b1305;font-weight:700;font-size:0.95rem}
+  .nav-actions{display:flex;align-items:center;gap:10px}
+  .nav-links{display:none;gap:14px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.08em}
+  .btn{padding:10px 14px;border-radius:999px;border:1px solid rgba(244,210,122,0.12);background:transparent;color:var(--accent);font-weight:700;cursor:pointer}
   .btn.primary{background:linear-gradient(180deg,var(--accent),#b48b3a);color:#1b1305;border-color:transparent}
 
-  /* Sections */
-  section{margin:12px 0;padding:14px;border-radius:16px;background:linear-gradient(180deg,#0f1114,rgba(10,11,12,0.6));border:1px solid rgba(244,210,122,0.04)}
-  .section-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px}
-  .section-h{font-size:16px;margin-bottom:8px}
-  .muted{color:var(--muted);font-size:13px}
+  /* Page grid */
+  main{display:grid;grid-template-columns:1fr;gap:var(--container-gap);padding:18px}
+  section{border-radius:var(--radius);background:linear-gradient(180deg,#0f1114,rgba(10,11,12,0.6));padding:18px;border:1px solid rgba(244,210,122,0.04);box-shadow:var(--shadow)}
+  .section-title{font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px}
+  h1,h2{margin:6px 0 10px}
+  h1{font-size:1.25rem;text-transform:uppercase;letter-spacing:0.04em}
+  .lead{color:var(--muted);font-size:0.95rem;max-width:56ch}
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;padding:18px;border-radius:20px;display:grid;gap:14px}
+  .hero .bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:contrast(0.95) saturate(0.95);opacity:0.36}
+  .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,6,8,0.12),rgba(5,6,8,0.9))}
+  .hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;gap:12px}
+  .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(5,6,8,0.6);border:1px solid rgba(244,210,122,0.18);color:var(--accent);font-weight:700;font-size:0.82rem}
 
   /* Cards grid */
   .grid{display:grid;gap:12px}
   .grid.cols-2{grid-template-columns:1fr 1fr}
-  .card{padding:10px;border-radius:12px;background:linear-gradient(180deg,#111217,#0b0c0f);border:1px solid rgba(244,210,122,0.03)}
-  .card .meta{display:flex;gap:8px;color:var(--muted);font-size:12px;margin-top:8px;flex-wrap:wrap}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .card{padding:12px;border-radius:14px;background:linear-gradient(180deg,#111217,#0b0c0f);border:1px solid rgba(244,210,122,0.03)}
+  .card img{height:160px;object-fit:cover;border-radius:10px;margin-bottom:10px}
+  .meta{display:flex;gap:8px;color:var(--muted);font-size:0.9rem;flex-wrap:wrap}
 
-  /* Footer */
-  footer{padding:18px 0;color:var(--muted);font-size:13px;text-align:center}
-
-  /* Accessibility & touch targets */
-  button, .btn, a{touch-action:manipulation}
-  .btn, .cta{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
-
-  /* Performance helpers */
-  img[loading="lazy"]{will-change:transform,opacity}
-  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-  /* Larger screens */
+  /* Responsive layout for larger screens */
   @media(min-width:720px){
-    h1{font-size:28px}
-    .hero{display:grid;grid-template-columns:1fr 360px;gap:18px;padding:22px}
+    .nav-links{display:flex}
+    main{grid-template-columns: 1fr 380px;align-items:start}
+    .hero{grid-column:1 / -1;grid-template-columns:1fr 360px;align-items:center;padding:22px}
+    .hero-inner{padding-right:12px}
+    .hero-side{display:flex;flex-direction:column;gap:10px;padding-left:12px}
     .grid.cols-2{grid-template-columns:repeat(2,1fr)}
-    .wrap{padding:20px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    section.full{grid-column:1 / -1}
   }
+
+  @media(min-width:1024px){
+    :root{--fluid-max:19}
+    .site{padding:24px}
+    main{grid-template-columns: 1fr 420px}
+    .hero{grid-template-columns:1fr 420px}
+    .card img{height:180px}
+  }
+
+  /* Accessibility & performance */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  button, .btn{touch-action:manipulation}
+  img[loading="lazy"]{will-change:transform,opacity}
 </style>
 </head>
 <body>
-  <header>
-    <div class="wrap nav" role="navigation" aria-label="Main">
-      <div class="logo" aria-hidden="false">BUBBLEBEE<span style="font-size:11px;margin-left:6px;opacity:0.9">Luxury Eco Retreat</span></div>
-      <div style="display:flex;gap:10px;align-items:center">
-        <nav class="small" aria-label="Sezioni">
-          <a href="#suite">Suite</a>
-          <a href="#esperienze">Esperienze</a>
-          <a href="#contatti">Contatti</a>
-        </nav>
-        <button class="cta" onclick="document.getElementById('contatti').scrollIntoView({behavior:'smooth'})" aria-label="Verifica disponibilità">Verifica disponibilità</button>
-      </div>
-    </div>
-  </header>
-
-  <main class="wrap" id="top">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop');" aria-hidden="true"></div>
-      <div class="overlay" aria-hidden="true"></div>
-      <div class="hero-content">
-        <div class="kicker">ABRUZZO · Colline di grano & Maiella</div>
-        <h1 id="hero-title">Luxury Eco Retreat sotto il cielo d’Abruzzo</h1>
-        <p class="lead">Casale in pietra, bolle trasparenti nel grano, notti stellate e rituali lenti.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#suite">Scopri le suite</a>
-          <a class="btn" href="#contatti">Richiedi una proposta</a>
+  <div class="site">
+    <header role="banner">
+      <div class="nav" role="navigation" aria-label="Main navigation">
+        <div class="brand">
+          <div class="logo" aria-hidden="false">BUBBLEBEE</div>
+          <div class="sr-only">Luxury Eco Retreat Abruzzo</div>
+        </div>
+        <div class="nav-actions">
+          <nav class="nav-links" aria-label="Sezioni">
+            <a href="#chi">Chi siamo</a>
+            <a href="#suite">Suite</a>
+            <a href="#esperienze">Esperienze</a>
+            <a href="#territorio">Territorio</a>
+            <a href="#contatti">Contatti</a>
+          </nav>
+          <button class="btn" onclick="document.getElementById('contatti').scrollIntoView({behavior:'smooth'})" aria-label="Verifica disponibilità">Verifica disponibilità</button>
         </div>
       </div>
-    </section>
+    </header>
 
-    <section id="chi" aria-labelledby="chi-h">
-      <div class="section-title">Chi è Bubblebee</div>
-      <h2 id="chi-h" class="section-h">Un rifugio di quiet luxury</h2>
-      <p class="muted">Casale in pietra, poche suite e bolle immerse nella natura. Ritmo lento, comfort curato, esperienza intima.</p>
-    </section>
+    <main>
+      <!-- HERO (full width) -->
+      <section class="hero full" aria-labelledby="hero-title">
+        <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop');" aria-hidden="true"></div>
+        <div class="overlay" aria-hidden="true"></div>
 
-    <section id="suite" aria-labelledby="suite-h">
-      <div class="section-title">Suite & Bubble Suite</div>
-      <h2 id="suite-h" class="section-h">Dormire tra pietra, legno e cielo</h2>
-      <div class="grid cols-2" role="list">
-        <article class="card" role="listitem" aria-label="Maiella Stone Suite">
-          <img src="https://images.unsplash.com/photo-1505691723518-36a3f3b6b8b6?q=80&w=800&auto=format&fit=crop" alt="Interno suite in casale" loading="lazy" width="800" height="533" />
-          <strong>Maiella Stone Suite</strong>
-          <p class="muted">Suite nel casale con camino, materiali naturali e vista sulle colline.</p>
-          <div class="meta"><span>2 ospiti</span><span>Colazione inclusa</span></div>
-        </article>
-
-        <article class="card" role="listitem" aria-label="Grainfield Bubble">
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop" alt="Bubble suite nel campo" loading="lazy" width="800" height="533" />
-          <strong>Grainfield Bubble</strong>
-          <p class="muted">Bolla trasparente nel grano per osservare il cielo in totale privacy.</p>
-          <div class="meta"><span>2 ospiti</span><span>Stargazing</span></div>
-        </article>
-      </div>
-    </section>
-
-    <section id="esperienze" aria-labelledby="exp-h">
-      <div class="section-title">Esperienze</div>
-      <h2 id="exp-h" class="section-h">Rituali lenti tra vino, fuoco e stelle</h2>
-      <div class="grid cols-2">
-        <div class="card" aria-label="Wine & Fire">
-          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop" alt="Tramonto e vino" loading="lazy" width="800" height="533" />
-          <strong>Tramonto, fuoco e calici</strong>
-          <p class="muted">Selezione di vini locali attorno al fuoco.</p>
+        <div class="hero-inner" id="hero-content">
+          <div class="kicker">ABRUZZO · Colline di grano & Maiella</div>
+          <h1 id="hero-title">Luxury Eco Retreat sotto il cielo d’Abruzzo</h1>
+          <p class="lead">Casale in pietra, bolle trasparenti nel grano, notti stellate e rituali lenti.</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn primary" href="#suite">Scopri le suite</a>
+            <a class="btn" href="#contatti">Richiedi una proposta</a>
+          </div>
         </div>
 
-        <div class="card" aria-label="Stargazing">
-          <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=800&auto=format&fit=crop" alt="Notte stellata" loading="lazy" width="800" height="533" />
-          <strong>Sotto un cielo pieno di stelle</strong>
-          <p class="muted">Osservazione del cielo lontano dalle luci urbane.</p>
-        </div>
-      </div>
-    </section>
+        <aside class="hero-side" aria-hidden="false">
+          <div style="background:linear-gradient(180deg,#0b0c0f,#0f1114);padding:12px;border-radius:12px;border:1px solid rgba(244,210,122,0.04)">
+            <strong style="display:block;margin-bottom:6px">Adults‑only · Colazione inclusa</strong>
+            <div style="color:var(--muted)">A 30 min dalla Costa dei Trabocchi · Check‑in 15:00–20:00</div>
+          </div>
+        </aside>
+      </section>
 
-    <section id="contatti" aria-labelledby="cont-h">
-      <div class="section-title">Info & prenotazioni</div>
-      <h2 id="cont-h" class="section-h">Scrivici per una proposta su misura</h2>
-      <div class="grid">
-        <div class="card" aria-label="Contatti">
-          <strong>Contatti</strong>
-          <p class="muted">Email: <a href="mailto:info@bubblebee.it">info@bubblebee.it</a><br>Tel: <a href="tel:+39XXXXXXXXXX">+39 XXX XXX XXXX</a></p>
-        </div>
-        <div class="card" aria-label="Dettagli utili">
-          <strong>Dettagli utili</strong>
-          <p class="muted">Adults‑only · Soggiorno minimo 2 notti (alta stagione) · Check‑in 15:00–20:00</p>
-        </div>
-      </div>
-    </section>
-  </main>
+      <!-- Main column -->
+      <section id="chi" class="full" aria-labelledby="chi-h">
+        <div class="section-title">Chi è Bubblebee</div>
+        <h2 id="chi-h">Un rifugio di quiet luxury tra i campi di grano</h2>
+        <p class="lead" style="max-width:70ch;color:var(--muted)">BUBBLEBEE nasce su una collina che guarda la Maiella. Casale in pietra, poche suite e bolle immerse nella natura: ritmo lento, luce, silenzio e comfort curato.</p>
+      </section>
 
-  <footer>
-    <div class="wrap">
-      <div style="opacity:0.9">BUBBLEBEE · Sant’Eusanio del Sangro (CH) · Italia</div>
-      <div style="margin-top:8px;color:var(--muted)">© BUBBLEBEE · Tutti i diritti riservati</div>
-    </div>
-  </footer>
+      <section id="suite" aria-labelledby="suite-h">
+        <div class="section-title">Suite & Bubble Suite</div>
+        <h2 id="suite-h">Dormire tra pietra, legno e cielo stellato</h2>
+        <div class="grid cols-2" role="list">
+          <article class="card" role="listitem" aria-label="Maiella Stone Suite">
+            <img src="https://images.unsplash.com/photo-1505691723518-36a3f3b6b8b6?q=80&w=1200&auto=format&fit=crop" alt="Interno suite in casale" loading="lazy" width="1200" height="800" />
+            <strong>Maiella Stone Suite</strong>
+            <p class="muted">Suite nel casale con camino, materiali naturali e vista sulle colline.</p>
+            <div class="meta"><span>2 ospiti</span><span>Colazione inclusa</span></div>
+          </article>
+
+          <article class="card" role="listitem" aria-label="Grainfield Bubble">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="Bubble suite nel campo" loading="lazy" width="1200" height="800" />
+            <strong>Grainfield Bubble</strong>
+            <p class="muted">Bolla trasparente nel grano per osservare il cielo in totale privacy.</p>
+            <div class="meta"><span>2 ospiti</span><span>Stargazing</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="esperienze" aria-labelledby="exp-h">
+        <div class="section-title">Esperienze</div>
+        <h2 id="exp-h">Rituali lenti tra vino, fuoco e stelle</h2>
+        <div class="grid cols-2">
+          <div class="card" aria-label="Wine & Fire">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop" alt="Tramonto e vino" loading="lazy" width="1200" height="800" />
+            <strong>Tramonto, fuoco e calici</strong>
+            <p class="muted">Selezione di vini locali attorno al fuoco.</p>
+          </div>
+
+          <div class="card" aria-label="Stargazing">
+            <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=1200&auto=format&fit=crop" alt="Notte stellata" loading="lazy" width="1200" height="800" />
+            <strong>Sotto un cielo pieno di stelle</strong>
+            <p class="muted">Osservazione del cielo lontano dalle luci urbane.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sidebar column (on wide screens) -->
+      <aside style="display:block">
+        <section id="territorio" aria-labelledby="ter-h">
+          <div class="section-title">Il territorio</div>
+          <h2 id="ter-h">Tra Maiella, borghi e Costa dei Trabocchi</h2>
+          <p class="muted">Nel raggio di 30 minuti: montagne, cantine e costa. Itinerari essenziali per scegliere poco, ma bene.</p>
+          <div class="grid cols-3" style="margin-top:12px">
+            <div class="card"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=800&auto=format&fit=crop" alt="Parco della Maiella" loading="lazy" width="800" height="533" /><strong>Parco della Maiella</strong></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc838?q=80&w=800&auto=format&fit=crop" alt="Cantine e borghi" loading="lazy" width="800" height="533" /><strong>Cantine & Borghi</strong></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop" alt="Costa dei Trabocchi" loading="lazy" width="800" height="533" /><strong>Costa dei Trabocchi</strong></div>
+          </div>
+        </section>
+
+        <section id="bottega" aria-labelledby="bot-h" style="margin-top:12px">
+          <div class="section-title">Bottega</div>
+          <h2 id="bot-h">Olio, vino e piccole cose da portare via</h2>
+          <p class="muted">Prodotti selezionati, disponibili per gli ospiti e su richiesta per la spedizione.</p>
+        </section>
+
+        <section id="contatti" aria-labelledby="cont-h" style="margin-top:12px">
+          <div class="section-title">Info & prenotazioni</div>
+          <h2 id="cont-h">Scrivici per una proposta su misura</h2>
+          <div class="card" style="margin-top:8px">
+            <strong>Contatti</strong>
+            <p class="muted">Email: <a href="mailto:info@bubblebee.it">info@bubblebee.it</a><br>Tel: <a href="tel:+39XXXXXXXXXX">+39 XXX XXX XXXX</a></p>
+            <div class="meta">Adults‑only · Soggiorno minimo 2 notti</div>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer style="text-align:center;padding:18px 0;color:var(--muted)">
+      <div>BUBBLEBEE · Sant’Eusanio del Sangro (CH) · Italia</div>
+      <div style="margin-top:8px">© BUBBLEBEE · Tutti i diritti riservati</div>
+    </footer>
+  </div>
 
   <script>
-    // Lightweight enhancement: smooth scroll for older browsers
+    // Smooth scroll fallback for older browsers
     (function(){
       if('scrollBehavior' in document.documentElement.style) return;
       document.querySelectorAll('a[href^="#"]').forEach(function(a){
         a.addEventListener('click',function(e){
-          e.preventDefault();
           var id = this.getAttribute('href').slice(1);
           var el = document.getElementById(id);
-          if(el) window.scrollTo({top: el.getBoundingClientRect().top + window.pageYOffset - 12, behavior:'smooth'});
+          if(el){ e.preventDefault(); window.scrollTo({top: el.getBoundingClientRect().top + window.pageYOffset - 12, behavior:'smooth'}); }
         });
       });
     })();
